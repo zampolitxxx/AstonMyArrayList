@@ -9,6 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("checkstyle")
 }
 
 repositories {
@@ -19,6 +20,9 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
+
 }
 
 testing {
@@ -26,7 +30,8 @@ testing {
         // Configure the built-in test suite
         val test by getting(JvmTestSuite::class) {
             // Use JUnit Jupiter test framework
-            useJUnitJupiter("5.10.2")
+            useJUnitJupiter("5.11.4")
+
         }
     }
 }

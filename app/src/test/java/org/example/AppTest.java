@@ -4,11 +4,33 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+
+    @Test
+    void emptyConstructor() {
+        MyArrayList<String> arrayList = new MyArrayList<>();
+        assertEquals(10, arrayList.length());
+    }
+
+    @Test
+    void capacityConstructor() {
+        MyArrayList<String> arrayList = new MyArrayList<>(5);
+        assertEquals(5, arrayList.length());
+    }
+
+    @Test()
+    void illegalCapacityConstructor() {
+        assertThrows(IllegalArgumentException.class, () -> new MyArrayList<>(-1));
+    }
+
+    @Test
+    void addOneElement() {
+        MyArrayList<String> classUnderTest = new MyArrayList<>();
+        assertTrue(classUnderTest.add("string"));
     }
 }

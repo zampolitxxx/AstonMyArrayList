@@ -4,8 +4,15 @@
 package org.example;
 
 public class App {
-    public static void main(String[] args) {
-        MyArrayList myArrayList = new MyArrayList();
-        myArrayList.add(1);
+    public static void main(String[] args) throws Exception {
+        MyArrayList<String> myArrayList = new MyArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            myArrayList.add(String.valueOf(i));
+        }
+        for (int i = 0; i < 2; i++) {
+            myArrayList.remove();
+        }
+        System.out.println(myArrayList);
     }
 }
+

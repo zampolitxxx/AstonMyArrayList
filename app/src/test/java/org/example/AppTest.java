@@ -14,13 +14,13 @@ class AppTest {
     @Test
     void emptyConstructor() {
         MyArrayList<String> arrayList = new MyArrayList<>();
-        assertEquals(10, arrayList.length());
+        assertEquals(10, arrayList.size());
     }
 
     @Test
     void capacityConstructor() {
         MyArrayList<String> arrayList = new MyArrayList<>(5);
-        assertEquals(5, arrayList.length());
+        assertEquals(5, arrayList.size());
     }
 
     @Test()

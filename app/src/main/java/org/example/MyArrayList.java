@@ -20,10 +20,18 @@ public class MyArrayList<E> {
 
     // Inserts the specified element at the specified position in this list.
     void add(int index, E element) {
+        if (index < 0 | index > array.length - 1) {
+            throw new IllegalArgumentException("Недействительный индекс");
+        }
+        final int ELEMENTS_NUMBER = 1;
+        shiftElements(index, ELEMENTS_NUMBER, true);
+        array[index] = element;
+        currentSize++;
     }
 
     // Appends the specified element to the end of this list.
     boolean add(E e) {
+        //TODO переделать логику. Если недостаточно места, увеличиваем размер
         if (currentSize < size()) {
             array[currentSize++] = e;
         } else {
@@ -44,14 +52,15 @@ public class MyArrayList<E> {
     }
 
     // Removes the element at the specified position in this list.
-//    E remove(int index) throws Exception {
-//        if (index < 0 || currentSize == 0) {
-//            throw new Exception("Illegal ");
-//        }
-//        int newSize = array.length - 1;
-//        Object[] buffArray = new Object[newSize];
-//        return (E) index;
-//    }
+    public E remove(int index) throws Exception {
+        if (index < 0 || currentSize == 0) {
+            throw new Exception("Illegal ");
+        }
+        E element = (E) array[index];
+        shiftElements(index, 1, false);
+        currentSize--;
+        return element;
+    }
 
     // Replaces the element at the specified position in this list with the specified element.
     E set(int index, E element) {
@@ -78,5 +87,24 @@ public class MyArrayList<E> {
         sb.delete(sb.length() - 2, sb.length());
         sb.append("]");
         return sb.toString();
+    }
+
+    private boolean isFreeSpaceAvalible(int elementsNumber) {
+        return array.length - (currentSize + elementsNumber) > 0;
+    }
+
+    // Сдвигает все элементы вправо или влево от index на offset элементов
+    private void shiftElements(int index, int offset, boolean rigth) {
+        if (!isFreeSpaceAvalible(offset)) {
+            resize();
+        }
+        int elementsNumber = array.length - index - 1;
+        int srcPosition = index + 1;
+        if (rigth) {
+            System.arraycopy(array, srcPosition, array, index + offset, elementsNumber);
+        } else {
+            System.arraycopy(array, srcPosition, array, index - offset, elementsNumber);
+        }
+
     }
 }

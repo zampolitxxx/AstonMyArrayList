@@ -6,12 +6,14 @@ package org.example;
 public class App {
     public static void main(String[] args) throws Exception {
         MyArrayList<String> myArrayList = new MyArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 7; i++) {
             myArrayList.add(String.valueOf(i));
         }
-        for (int i = 0; i < 2; i++) {
-            myArrayList.remove();
-        }
+        System.out.println(myArrayList);
+        myArrayList.add(3, "Element");
+        System.out.println(myArrayList);
+
+        myArrayList.remove(2);
         System.out.println(myArrayList);
     }
 }
